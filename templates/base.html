@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+        {% block head %}
+		<meta charset="utf-8">
+		<title>{% block title %}{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+		<div class="model_viewer"></div>
+		<link rel="stylesheet" href="{{ url_for('static', filename='screen.css') }}" />
+        {% endblock %}
+    </head>
+
+  <body>
+	{% block content %}  
+	{% endblock %}
+  </body>
+
+</html>

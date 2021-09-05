@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Coat Color - Cat Production{% endblock %}
+
+{% block content %}
+
+    <model-viewer id="cateye" src="static/{{ model }}" camera-controls auto-rotate ar
+        shadow-intensity="1">
+        <div>
+            <p>Eye Color</p>
+            <input type="range" min="0.01" max="1" value="0.5" step="0.01" id="red_slider">
+            <br/><input type="range" min="0.01" max="1" value="0.5" step="0.01" id="green_slider">
+            <br/><input type="range" min="0.01" max="1" value="0.5" step="0.01" id="blue_slider">
+        </div>
+        <br /><button id="change_color">change color</button>
+    </model-viewer>
+        <script>
+            document.getElementById('change_color').addEventListener('click', () => {
+            eyecolor = document.getElementById('cateye');
+            red = document.getElementById('red_slider').value;
+            green = document.getElementById('green_slider').value;
+            blue = document.getElementById('blue_slider').value;
+            let new_fill = [red, green, blue];
+            let [material] = eyecolor.model.materials;
+            material.pbrMetallicRoughness.setBaseColorFactor(new_fill);
+            })
+            
+
+        </script>
+
+<div id="button">
+	<p>
+		<a href="{{ url_for('coatcolor') }}">Back</a>
+		<a href="{{ url_for('result') }}">Next</a>
+	</p>
+</div>
+{% endblock %}

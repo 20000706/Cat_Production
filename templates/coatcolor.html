@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Coat Color - Cat Production{% endblock %}
+
+{% block content %}
+
+	<model-viewer id="catbody" src="{{ url_for('static', filename='cat_body.glb') }}" camera-controls auto-rotate ar
+		shadow-intensity="1">
+		<div class="controls">
+			<div>
+				<p>Coat Color</p>
+				<select id="coat">
+					{% for coatcolor in coatcolors %}
+					<option value="static/{{ coatcolor[1] }}">{{ coatcolor[0] }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</model-viewer>
+
+	<script type="module">
+		const modelViewerTexture = document.querySelector("model-viewer#catbody");
+
+		modelViewerTexture.addEventListener("load", (ev) => {
+
+			let material = modelViewerTexture.model.materials[0];
+
+			let applyPBRTexture = (channel, event) => {
+				material.pbrMetallicRoughness[channel].texture.source.setURI(event.target.value);
+			}
+
+			document.querySelector('#coat').addEventListener('input', (event) => {
+				applyPBRTexture('baseColorTexture', event);
+			});
+		})
+	</script>
+	
+	<div id="button">
+	<p>
+		<a href="{{ url_for('index') }}">Back</a>
+		<a href="{{ url_for('eyecolor') }}">Next</a>
+	</p>
+	</div>
+
+{% endblock %}

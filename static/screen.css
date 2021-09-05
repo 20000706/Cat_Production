@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin Sketch');
+
+body{
+    font-family: 'Cabin Sketch';
+}
+model-viewer{
+    width: 90%;
+    height: 590px;
+    margin: auto;
+}
+
+h1 {
+    color: rgb(8, 75, 129);
+    font-size: 5em;
+    margin: 0;
+  }
+
+h2 {
+    font-size: 0.8em;
+}
+
+a {
+    color: rgb(99, 177, 223);
+    text-decoration: none;
+    text-align: center;
+}
+
+p {
+    font-size: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+#header{
+    text-align: center;
+    padding-top: 30px;
+    text-align: center;
+    
+}
+
+#rendered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.25);
+}
+
+#cards{
+    height: 70vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card_container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.front, .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.7s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.front {
+    background-position: center;
+    transform: rotatey(0deg);
+}
+
+.card_container:hover .front {
+    transform: rotatey(-180deg);
+}
+
+.back {
+    background-color: gainsboro;
+    transform: rotatey(-180deg);
+}
+
+.card_container:hover .back{
+    transform: rotatey(0deg);
+}
+
+#button{
+    margin-left: 50px;
+    margin-right: 50px;
+}
