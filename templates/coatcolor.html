@@ -11,7 +11,7 @@
 				<p>Coat Color</p>
 				<select id="coat">
 					{% for coatcolor in coatcolors %}
-					<option value="static/{{ coatcolor[1] }}">{{ coatcolor[0] }}</option>
+					<option value='{"texture": "static/{{ coatcolor[1] }}", "model": "{{ coatcolor[2] }}"}'>{{ coatcolor[0] }}</option>
 					{% endfor %}
 				</select>
 			</div>
@@ -24,11 +24,13 @@
 		modelViewerTexture.addEventListener("load", (ev) => {
 
 			let material = modelViewerTexture.model.materials[0];
-
+			localStorage.setItem('model', 'cat_Swhite.glb');
 			let applyPBRTexture = (channel, event) => {
 				material.pbrMetallicRoughness[channel].texture.source.setURI(event.target.value);
+				let value = JSON.parse(event.target.value);
+				material.pbrMetallicRoughness[channel].texture.source.setURI(value.texture);
+				localStorage.setItem('model', value.model)
 			}
-
 			document.querySelector('#coat').addEventListener('input', (event) => {
 				applyPBRTexture('baseColorTexture', event);
 			});

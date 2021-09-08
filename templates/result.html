@@ -3,14 +3,32 @@
 {% block title %}Result - Cat Production{% endblock %}
 
 {% block content %}
-<model-viewer id="cat" src="{{ url_for('static', filename='cat_Swhite.glb') }}" camera-controls auto-rotate ar
+<model-viewer id="cat" src="static/{{ model }}" camera-controls auto-rotate ar
 		skybox-image="{{ url_for('static', filename='winter.png') }}">
 </model-viewer>
 <div id="button">
 	<p>
 		<a href="{{ url_for('eyecolor') }}">Back</a>
+		<a href="#" id="save" download="cat.png" t="download">Download</a>
 		<a href="{{ url_for('index') }}">Home</a>
 	</p>
 </div>
+
+<script type='module'>
+    let model = localStorage.getItem('model');
+    document.getElementById('cat').src = 'static/' + model;
+	let eyecolor = localStorage.getItem('eyecolor');
+	const modelViewerColor = document.querySelector("model-viewer#cat");
+	console.log(modelViewerColor)
+    let [material] = modelViewerColor.model.materials;
+    material.pbrMetallicRoughness.setBaseColorFactor(eyecolor);
+	
+    const modelViewerTexture = document.querySelector('model-viewer#cat');
+	modelViewerTexture.addEventListener('load', () => {
+		document.getElementById('save').addEventListener('click', () => {
+			document.getElementById('save').href = document.getElementById('cat').toDataURL('image/png', 1.0);
+		})
+	})
+</script>
 
 {% endblock %}

@@ -7,34 +7,50 @@
 	<h1>CAT PRODUCTION</h1>
 	<em>Create your self a cute cat</em>
 </div>
-<div id="cards">
-	<div class="card_container">
-		<div class="front" style="background-image: url('/static/solid_texture.png');"></div>
-		<div class="back">
-			<a href="{{ url_for('coatcolor') }}">
-			<img src="{{ url_for('static', filename='cat_rendered_solid.png') }}" id="rendered" />
-			<h2>Solid</h2>
-			</a>
+<form action="{{ url_for('coatcolor') }}" method="post">
+	<div id="cards">
+		<div id="Solid" type="button" onclick="chooseType(this)" class="card_container">
+			<div class="front" style="background-image: url('/static/solid_texture.png');"></div>
+			<div class="back">
+				<a href="{{ url_for('coatcolor') }}">
+				<img src="{{ url_for('static', filename='cat_rendered_solid.png') }}" id="rendered" />
+				<h2>Solid</h2>
+				</a>
+			</div>
+		</div>
+		<div id="Bicolor" type="button" onclick="chooseType(this)" class="card_container">
+			<div class="front" style="background-image: url('/static/bicolor_texture.png');"></div>
+			<div class="back">
+				<a href="{{ url_for('coatcolor') }}">
+				<img src="{{ url_for('static', filename='cat_rendered_bicolor.png') }}" id="rendered" />
+				<h2>Bicolor</h2>
+				</a>
+			</div>
+		</div>
+		<div id="Tabby" type="button" onclick="chooseType(this)" class="card_container">
+			<div class="front" style="background-image: url('/static/tabby_texture.png');"></div>
+			<div class="back">
+				<a href="{{ url_for('coatcolor') }}">
+				<img src="{{ url_for('static', filename='cat_rendered_tabby.png') }}" id="rendered" />
+				<h2>Tabby</h2>
+				</a>
+			</div>
 		</div>
 	</div>
-	<div class="card_container">
-		<div class="front" style="background-image: url('/static/bicolor_texture.png');"></div>
-		<div class="back">
-			<a href="{{ url_for('coatcolor') }}">
-			<img src="{{ url_for('static', filename='cat_rendered_bicolor.png') }}" id="rendered" />
-			<h2>Bicolor</h2>
-			</a>
-		</div>
-	</div>
-	<div class="card_container">
-		<div class="front" style="background-image: url('/static/tabby_texture.png');"></div>
-		<div class="back">
-			<a href="{{ url_for('coatcolor') }}">
-			<img src="{{ url_for('static', filename='cat_rendered_tabby.png') }}" id="rendered" />
-			<h2>Tabby</h2>
-			</a>
-		</div>
-	</div>
-</div>
+</form>
+<script>
+	function chooseType(button) {
+		if (button.id === "Solid") {
+			localStorage.setItem('type', 'S');
+		}
+		else if (button.id === "Bicolor") {
+			localStorage.setItem('type', 'BW');
+		}
+		else if (button.id === "Tabby") {
+			localStorage.setItem('type', 'MT');
+		}
+	}
+	localStorage.removeItem('model');
+</script>
 
 {% endblock %}

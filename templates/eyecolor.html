@@ -9,29 +9,35 @@
         <div>
             <p>Eye Color</p>
             <input type="range" min="0.01" max="1" value="0.5" step="0.01" id="red_slider">
+            <label for="red_slider">Red</label>
             <br/><input type="range" min="0.01" max="1" value="0.5" step="0.01" id="green_slider">
+            <label for="green_slider">Green</label>
             <br/><input type="range" min="0.01" max="1" value="0.5" step="0.01" id="blue_slider">
+            <label for="blue_slider">Blue</label>
         </div>
-        <br /><button id="change_color">change color</button>
     </model-viewer>
-        <script>
-            document.getElementById('change_color').addEventListener('click', () => {
+    <script>
+            let model = localStorage.getItem('model');
+            document.getElementById('cateye').src = 'static/' + model;
+            let changeColor = () => {
             eyecolor = document.getElementById('cateye');
             red = document.getElementById('red_slider').value;
             green = document.getElementById('green_slider').value;
             blue = document.getElementById('blue_slider').value;
             let new_fill = [red, green, blue];
+            localStorage.setItem('eyecolor', new_fill);
             let [material] = eyecolor.model.materials;
             material.pbrMetallicRoughness.setBaseColorFactor(new_fill);
-            })
-            
+            }
+            document.getElementById('red_slider').addEventListener('change', changeColor);
+            document.getElementById('green_slider').addEventListener('change', changeColor);
+            document.getElementById('blue_slider').addEventListener('change', changeColor);
+    </script>
 
-        </script>
-
-<div id="button">
-	<p>
-		<a href="{{ url_for('coatcolor') }}">Back</a>
-		<a href="{{ url_for('result') }}">Next</a>
-	</p>
-</div>
+        <div id="button">
+            <p>
+                <a href="{{ url_for('coatcolor') }}">Back</a>
+                <a href="{{ url_for('result') }}">Next</a>
+            </p>
+        </div>
 {% endblock %}

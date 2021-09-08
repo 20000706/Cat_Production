@@ -13,7 +13,7 @@ def index():
 def coatcolor():
     db = sqlite3.connect(CATDB)
     coatcolors = []
-    cur = db.execute('SELECT coatcolor,texture FROM coatcolors')
+    cur = db.execute('SELECT coatcolor,texture,model FROM coatcolors')
     for row in cur:
         coatcolors.append(list(row))
     db.close()
@@ -23,7 +23,7 @@ def coatcolor():
 def eyecolor():
     db = sqlite3.connect(CATDB)
     db.close()
-    return render_template('eyecolor.html', model='cat_BWred.glb')
+    return render_template('eyecolor.html', model='cat_Swhite.glb')
 
 @app.route('/result')
 def result():
