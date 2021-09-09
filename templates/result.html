@@ -15,20 +15,22 @@
 </div>
 
 <script type='module'>
-    let model = localStorage.getItem('model');
-    document.getElementById('cat').src = 'static/' + model;
-	let eyecolor = localStorage.getItem('eyecolor');
-	const modelViewerColor = document.querySelector("model-viewer#cat");
-	console.log(modelViewerColor)
-    let [material] = modelViewerColor.model.materials;
-    material.pbrMetallicRoughness.setBaseColorFactor(eyecolor);
-	
     const modelViewerTexture = document.querySelector('model-viewer#cat');
+	let model = localStorage.getItem('model');
+    document.getElementById('cat').src = 'static/' + model;
+	modelViewerTexture.addEventListener('load', () => {
+		let eyecolorString = localStorage.getItem('eyecolor');
+		let eyecolor = eyecolorString.split(',');
+		const modelViewerColor = document.querySelector('model-viewer#cat');
+		let [material] = modelViewerColor.model.materials;
+        material.pbrMetallicRoughness.setBaseColorFactor(eyecolor);
+	})
 	modelViewerTexture.addEventListener('load', () => {
 		document.getElementById('save').addEventListener('click', () => {
 			document.getElementById('save').href = document.getElementById('cat').toDataURL('image/png', 1.0);
 		})
 	})
 </script>
+
 
 {% endblock %}
